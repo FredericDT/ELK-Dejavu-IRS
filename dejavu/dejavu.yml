@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["deployment:default:dejavu"]'
+    workload.cattle.io/targetWorkloadIdNoop: "true"
+    workload.cattle.io/workloadPortBased: "true"
+  creationTimestamp: "2020-06-03T05:21:03Z"
+  labels:
+    cattle.io/creator: norman
+  name: dejavu
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1beta2
+    controller: true
+    kind: deployment
+    name: dejavu
+    uid: b1000ad9-b784-4c70-ab8b-55edfdb72426
+  resourceVersion: "136397"
+  selfLink: /api/v1/namespaces/default/services/dejavu
+  uid: b8b3ee5d-d851-4a72-b44d-b62fd9ccb8b4
+spec:
+  clusterIP: 10.43.62.38
+  ports:
+  - name: 1358tcp300001-dejavu
+    port: 1358
+    protocol: TCP
+    targetPort: 1358
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-default-dejavu
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+

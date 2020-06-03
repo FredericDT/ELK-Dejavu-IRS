@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "5"
+    field.cattle.io/creatorId: user-7qh88
+    field.cattle.io/publicEndpoints: '[{"addresses":["192.168.21.45"],"port":9200,"protocol":"TCP","serviceName":"default:elasticsearch-oss-7-nodeport","allNodes":true},{"addresses":["192.168.21.45"],"port":9300,"protocol":"TCP","serviceName":"default:elasticsearch-oss-7-nodeport","allNodes":true}]'
+  creationTimestamp: "2020-06-03T05:23:06Z"
+  generation: 8
+  labels:
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: deployment-default-elasticsearch-oss-7
+  name: elasticsearch-oss-7
+  namespace: default
+  resourceVersion: "188042"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/elasticsearch-oss-7
+  uid: 42228278-bd9b-40d6-973c-23fa16f9eabc
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-elasticsearch-oss-7
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2020-06-03T11:48:55Z"
+        field.cattle.io/ports: '[[{"containerPort":9200,"dnsName":"elasticsearch-oss-7-nodeport","hostPort":0,"kind":"NodePort","name":"9200tcp92001","protocol":"TCP","sourcePort":9200},{"containerPort":9300,"dnsName":"elasticsearch-oss-7-nodeport","hostPort":0,"kind":"NodePort","name":"9300tcp93001","protocol":"TCP","sourcePort":9300}]]'
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-elasticsearch-oss-7
+    spec:
+      containers:
+      - env:
+        - name: ELASTIC_PASSWORD
+          value: fdt
+        - name: discovery.type
+          value: single-node
+        - name: http.cors.allow-credentials
+          value: "true"
+        - name: http.cors.allow-headers
+          value: X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+        - name: http.cors.allow-origin
+          value: '*'
+        - name: http.cors.enabled
+          value: "true"
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.0.1
+        imagePullPolicy: Always
+        name: elasticsearch-oss-7
+        ports:
+        - containerPort: 9200
+          name: 9200tcp92001
+          protocol: TCP
+        - containerPort: 9300
+          name: 9300tcp93001
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2020-06-03T05:27:13Z"
+    lastUpdateTime: "2020-06-03T05:27:13Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2020-06-03T05:23:06Z"
+    lastUpdateTime: "2020-06-03T11:49:21Z"
+    message: ReplicaSet "elasticsearch-oss-7-5b87b69c79" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 8
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
+
